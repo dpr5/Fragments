@@ -1,0 +1,37 @@
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+
+import com.example.android.android_me.R;
+
+public class MainActivity extends AppCompatActivity {
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        Fragment fragment = MyFragment.newInstance("Drew", 28);
+        Fragment fragment2 = MyFragment.newInstance("Mike", 33);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.add(R.id.pager, fragment);
+        fragmentTransaction.add(R.id.pager, fragment2);
+        fragmentTransaction.commit();
+
+
+        ViewPager viewPager1 = (ViewPager) findViewById(R.id.pager);
+        PagerAdapter adapter1 = new PagerAdapter(getSupportFragmentManager(), 3);
+
+
+        viewPager1.setAdapter(adapter1);
+
+    }
+
+}
