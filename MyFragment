@@ -1,0 +1,54 @@
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.example.android.android_me.R;
+
+/**
+ * Created by ranad_000 on 10/25/2017.
+ */
+
+public class MyFragment extends Fragment {
+
+        private String name;
+        private int age;
+
+        private TextView mNameTextView;
+        private TextView mAgeTextView;
+
+        public static MyFragment newInstance(String name, int age) {
+            Bundle bundle = new Bundle();
+            bundle.putString("name", name);
+            bundle.putInt("age", age);
+
+            MyFragment fragment = new MyFragment();
+            fragment.setArguments(bundle);
+
+            return fragment;
+        }
+
+        private void readBundle(Bundle bundle) {
+            if (bundle != null) {
+                name = bundle.getString("name");
+                age = bundle.getInt("age");
+            }
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.frag_tab1, container, false);
+            mNameTextView = (TextView) view.findViewById(R.id.text1);
+            mAgeTextView = (TextView) view.findViewById(R.id.text2);
+
+            readBundle(getArguments());
+
+            mNameTextView.setText(String.format("Name: %s", name));
+            mAgeTextView.setText(String.format("Age: %d", age));
+
+            return view;
+        }
+    }
+
